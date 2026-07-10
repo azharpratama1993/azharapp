@@ -1,45 +1,36 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="id">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Inventory Elektromedis')</title>
+    <link rel="shortcut icon" href="{{ asset('template/assets/compiled/svg/favicon.svg') }}" type="image/x-icon">
+    <!-- <link rel="shortcut icon" href="{{ asset('template/assets/static/images/logo/favicon.svg') }}" type="image/x-icon"> -->
+    <link rel="stylesheet" href="{{ asset('template/assets/compiled/css/app.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('template/scss/app.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('template/assets/compiled/css/app-dark.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('template/scss/themes/dark/app-dark.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('template/assets/compiled/css/iconly.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('template/scss/iconly.css') }}"> -->
+</head>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- Styles -->
-        @livewireStyles
-    </head>
-    <body class="font-sans antialiased">
-        <x-banner />
-
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+<body>
+    <script src="{{ asset('template/assets/static/js/initTheme.js') }}"></script>
+    <div id="app">
+        @include('partials.sidebar')
+        <div id="main">
+            @include('partials.header')
+            <div class="page-heading">
+                <h3>@yield('page-title', 'Dashboard')</h3>
+            </div>
+            <div class="page-content">
+                @yield('content')
+            </div>
+            @include('partials.footer')
         </div>
+    </div>
+    @include('partials.scripts')
+</body>
 
-        @stack('modals')
-
-        @livewireScripts
-    </body>
 </html>

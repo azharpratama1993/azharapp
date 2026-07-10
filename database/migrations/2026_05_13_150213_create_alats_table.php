@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('merek', 60);
             $table->string('tipe', 60);
             $table->string('no_seri', 60);
-            $table->enum('kondisi_alat', ['Baik', 'Tidak Baik']);            $table->string('lokasi', 30);
+            $table->enum('kondisi_alat', ['Baik', 'Tidak Baik']);
+            $table->string('lokasi', 30);
             $table->timestamps();
         });
     }

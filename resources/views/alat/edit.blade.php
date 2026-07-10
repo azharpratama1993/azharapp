@@ -1,94 +1,111 @@
-<x-app-layout>
-    <div class="p-6">
+@extends('layouts.app')
+@section('title', 'Form Ubah Data Alat')
+@section('page-title', 'Form Ubah Data Alat Elektromedis')
+@section('content')
+<div class="p-6 card">
 
-        <form action="{{ route('alat.update', $alat->id) }}"
-              method="POST">
+    <form action="{{ route('alat.update', $alat->id) }}" method="POST" class="form form-horizontal">
 
-            @csrf
-            @method('PUT')
+        @csrf
+        @method('PUT')
 
-            <div class="mb-4">
-                <label>Nama Alat</label>
-                <input type="text"
-                       name="nama_alat"
-                        value="{{ $alat->nama_alat }}"
-                       class="border w-full p-2">
+        <div class="form-body p-4">
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label class="col-form-label" for="nama_alat">Nama Alat</label>
+                </div>
+                <div class="col-md-8 form-group">
+                    <!-- <input type="text" name="nama_alat" class="border w-full p-2"> -->
+                    <input type="text" id="nama_alat" name="nama_alat" class="border w-full p-2 form-control" value="{{ $alat->nama_alat }}">
+                </div>
             </div>
-            
-            <div class="mb-4">
-                <label>Tahun Pembelian</label>
-                <select name="tahun_pembelian"
-                        class="border w-full p-2">
 
-                    @for($tahun = date('Y'); $tahun >= 2000; $tahun--)
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label class="col-form-label" for="tahun_pembelian">Tahun Pembelian</label>
+                </div>
 
-                        <option value="{{ $tahun }}"
-                            {{ $alat->tahun_pembelian == $tahun ? 'selected' : '' }} >
+                <div class="col-md-8 form-group">
+                    <select id="tahun_pembelian" name="tahun_pembelian" class="border w-full p-2 form-control">
 
+                        @for($tahun = date('Y'); $tahun >= 2000; $tahun--)
+                        <option value="{{ $tahun }}" {{ $alat->tahun_pembelian == $tahun ? 'selected' : '' }}>
                             {{ $tahun }}
-
                         </option>
-
-                    @endfor
-
-
-                </select>
+                        @endfor
+                    </select>
+                </div>
             </div>
 
-            <div class="mb-4">
-                <label>Merek</label>
-                <input type="text"
-                       name="merek"
-                        value="{{ $alat->merek }}"
-                       class="border w-full p-2">
-            </div>
-            
-            <div class="mb-4">
-                <label>Tipe</label>
-                <input type="text"
-                       name="tipe"
-                        value="{{ $alat->tipe }}"
-                       class="border w-full p-2">
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label class="col-form-label" for="merek">Merek</label>
+                </div>
+
+                <div class="col-md-8 form-group">
+                    <input type="text" id="merek" name="merek" class="border w-full p-2 form-control" value="{{ $alat->merek }}">
+                </div>
             </div>
 
-            <div class="mb-4">
-                <label>No Seri</label>
-                <input type="text"
-                       name="no_seri"
-                        value="{{ $alat->no_seri }}"
-                       class="border w-full p-2">
-            </div>
-            
-            <div class="mb-4">
-                <label>Kondisi Alat</label>
-                <select name="kondisi_alat"
-                        class="border w-full p-2">
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label class="col-form-label" for="tipe">Tipe</label>
 
-                    <option value="Baik"
-                        {{ $alat->kondisi_alat == 'Baik' ? 'selected' : '' }}>
-                        Baik
-                    </option>
+                </div>
 
-                    <option value="Tidak Baik"
-                        {{ $alat->kondisi_alat == 'Tidak Baik' ? 'selected' : '' }}>
-                        Tidak Baik
-                    </option>
-                </select>
-            </div>
-            
-            <div class="mb-4">
-                <label>Lokasi</label>
-                <input type="text"
-                       name="lokasi"
-                        value="{{ $alat->lokasi }}"
-                       class="border w-full p-2">
+                <div class="col-md-8 form-group">
+                    <input type="text" id="tipe" name="tipe" class="border w-full p-2 form-control" value="{{ $alat->tipe }}">
+                </div>
             </div>
 
-            <button class="bg-green-500 text-white px-4 py-2 rounded">
-                Update
-            </button>
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label class="col-form-label" for="no_seri">No Seri</label>
+                </div>
 
-        </form>
+                <div class="col-md-8 form-group">
+                    <input type="text" id="no_seri" name="no_seri" class="border w-full p-2 form-control" value="{{ $alat->no_seri }}">
+                </div>
+            </div>
 
-    </div>
-</x-app-layout>
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label class="col-form-label" for="kondisi_alat">Kondisi Alat</label>
+                </div>
+
+                <div class="col-md-8 form-group">
+                    <select name="kondisi_alat" id="kondisi_alat" class="border w-full p-2 form-control">
+
+                        <option value="">-- Pilih Kondisi --</option>
+
+                        <option value="Baik" {{ $alat->kondisi_alat == 'Baik' ? 'selected' : '' }}>Baik</option>
+                        <option value="Tidak Baik" {{ $alat->kondisi_alat == 'Tidak Baik' ? 'selected' : '' }}>Tidak Baik</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label class="col-form-label" for="lokasi">Lokasi</label>
+
+                </div>
+
+                <div class="col-md-8 form-group">
+                    <input type="text" id="lokasi" name="lokasi" class="border w-full p-2 form-control" value="{{ $alat->lokasi }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="form-footer">
+                <!-- <button class="bg-blue-500 text-white px-4 py-2 rounded"> -->
+                <button class="btn btn-success">
+                    Ubah
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>
+@endsection
